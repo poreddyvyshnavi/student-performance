@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Student Portal Login</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+display:flex;
+height:100vh;
+}
+
+/* LEFT SIDE */
+
+.leftPanel{
+width:60%;
+background:#1e3a8a;   /* changed from green to blue */
+color:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.leftPanel h1{
+font-size:60px;
+margin-bottom:40px;
+}
+
+.cards{
+display:flex;
+gap:40px;
+}
+
+.card{
+background:#e9d7b5;
+padding:40px;
+border-radius:15px;
+width:220px;
+text-align:center;
+color:#1e3a8a;
+font-size:22px;
+font-weight:bold;
+}
+
+/* RIGHT SIDE */
+
+.rightPanel{
+width:40%;
+background:#f8f8f8;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* LOGIN BOX */
+
+.loginBox{
+background:white;
+padding:40px;
+width:320px;
+border-radius:10px;
+border:1px solid #1e3a8a; /* changed color */
+text-align:center;
+}
+
+.loginBox img{
+width:120px;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-bottom:1px solid #ccc;
+outline:none;
+}
+
+.captchaRow{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
+}
+
+.captcha{
+font-weight:bold;
+font-size:22px;
+letter-spacing:5px;
+background:#eee;
+padding:8px 10px;
+}
+
+/* BUTTON */
+
+button{
+margin-top:20px;
+padding:12px;
+width:100%;
+background:#1e3a8a;  /* blue button */
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+.links{
+display:flex;
+justify-content:space-between;
+margin-top:15px;
+font-size:14px;
+color:#1e3a8a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LEFT DESIGN -->
+
+<div class="leftPanel">
+
+<h1>STUDENT LOGIN</h1>
+
+<div class="cards">
+
+<div class="card">
+Student
+</div>
+
+</div>
+
+</div>
+
+<!-- LOGIN PANEL -->
+
+<div class="rightPanel">
+
+<div class="loginBox">
+
+<img src="https://upload.wikimedia.org/wikipedia/en/5/5d/GITAM_University_logo.png">
+
+<input id="userid" placeholder="User ID">
+
+<input id="password" type="password" placeholder="Password">
+
+<div class="captchaRow">
+
+<div id="captchaText" class="captcha"></div>
+
+<input id="captchaInput" placeholder="Enter CAPTCHA">
+
+</div>
+
+<button onclick="login()">LOGIN</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* CAPTCHA GENERATOR */
+
+function generateCaptcha(){
+
+let chars="0123456789";
+let cap="";
+
+for(let i=0;i<5;i++){
+
+cap+=chars[Math.floor(Math.random()*chars.length)];
+
+}
+
+document.getElementById("captchaText").innerText=cap;
+
+return cap;
+
+}
+
+let captcha=generateCaptcha();
+
+/* LOGIN */
+
+function login(){
+
+let id=document.getElementById("userid").value;
+let pass=document.getElementById("password").value;
+let cap=document.getElementById("captchaInput").value;
+
+if(pass!="1234"){
+
+alert("Password must be 1234");
+return;
+
+}
+
+if(cap!=captcha){
+
+alert("Invalid CAPTCHA");
+captcha=generateCaptcha();
+return;
+
+}
+
+fetch("student_attendance_quiz_dataset_100.csv")
+
+.then(res=>res.text())
+
+.then(data=>{
+
+let rows=data.trim().split("\n").slice(1).map(r=>r.split(","));
+
+let student=rows.find(r=>r[0]==id);
+
+if(student){
+
+localStorage.setItem("studentID",id);
+
+window.location="dashboard.html";
+
+}else{
+
+alert("Student ID not found");
+
+}
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
+
