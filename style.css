@@ -1,0 +1,100 @@
+body{
+margin:0;
+font-family:Segoe UI;
+background:#f4f6f8;
+}
+
+.login-container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.login-box{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+input{
+padding:8px;
+margin:10px;
+}
+
+button{
+padding:8px 15px;
+background:#177a6b;
+color:white;
+border:none;
+border-radius:4px;
+cursor:pointer;
+}
+
+.navbar{
+height:60px;
+background:#177a6b;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
+}
+
+.container{
+display:flex;
+}
+
+.sidebar{
+width:220px;
+background:white;
+height:100vh;
+padding:20px;
+border-right:1px solid #ddd;
+}
+
+.sidebar p{
+cursor:pointer;
+padding:10px;
+}
+
+.dashboard{
+flex:1;
+padding:30px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.section{
+display:none;
+}
+
+canvas{
+width:500px !important;
+height:350px !important;
+margin-top:20px;
+}
+
+table{
+border-collapse:collapse;
+margin-top:20px;
+background:white;
+}
+
+table th,table td{
+padding:10px;
+border:1px solid #ddd;
+}
